@@ -44,4 +44,12 @@ public class InvoiceController {
 		model.addAttribute("total", invoiceService.getCartTotal(cart));
 		return "cart";
 	}
+	
+	@RequestMapping("/order")
+	public String getOrder(@RequestParam int cart_id, Model model) {
+		
+		Invoice cart = invoiceService.getById(cart_id);
+		model.addAttribute("invoice", cart);		
+		return "order-form";
+	}
 }

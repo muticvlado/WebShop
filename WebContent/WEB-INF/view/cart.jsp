@@ -22,6 +22,7 @@
 	<tr><td>Surname</td><td>${cart.user.surname}</td></tr>
 </table>
 <hr>
+<a href="order?cart_id=${cart.id}">Buy</a>
 	<table>
 		<tr><th>Id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Image</th><th>Action</th><th>Total</th></tr>
 			<c:forEach items="${cart.items}" var="item">
@@ -39,7 +40,7 @@
 					<td>${item.price*item.quantity}</td>								
 				</tr>
 			</c:forEach>
-			<tr><td colspan="6"><h3 style: "text-align: center">${total}</h3></td></tr>			
+			<tr><td colspan="6"><h3 style="text-align: center">${total}</h3></td></tr>			
 	</table>
 	
 </body>

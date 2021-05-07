@@ -13,5 +13,6 @@
 <a href="product-list">Product list</a>
 <a href="user-list">User list</a>
 <a href="catalog">Catalog</a>
+<a href="invoice-list">Invoices</a>
 </body>
 </html>

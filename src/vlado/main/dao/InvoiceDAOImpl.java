@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,10 +57,16 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 	public Invoice getCart(String username) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		Invoice cart = session
-				.createQuery("Select i from Invoice i where i.user.username=:username and i.complete = 0", Invoice.class)
-				.setParameter("username", username)
-				.getSingleResult();
+		Invoice cart = null;
+		
+		try {
+			cart = session
+					.createQuery("Select i from Invoice i where i.user.username=:username and i.complete = 0", Invoice.class)
+					.setParameter("username", username)
+					.getSingleResult();
+		} catch (NoResultException err) {
+			
+		}
 		
 		if(cart != null) {
 			Hibernate.initialize(cart.getItems());
@@ -112,5 +120,14 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 			total += item.getPrice()*item.getQuantity();
 		}		
 		return total;
+	}
+
+	@Override
+	public void completeOrder(int invoice_id) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Invoice cart = session.get(Invoice.class, invoice_id);
+		cart.setComplete(true);	
+		cart.setAmount(getCartTotal(cart));
 	}
 }

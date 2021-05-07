@@ -45,11 +45,19 @@ public class InvoiceController {
 		return "cart";
 	}
 	
-	@RequestMapping("/order")
-	public String getOrder(@RequestParam int cart_id, Model model) {
+	@RequestMapping("/order-save")
+	public String orderSave(@RequestParam int cart_id) {
 		
-		Invoice cart = invoiceService.getById(cart_id);
-		model.addAttribute("invoice", cart);		
-		return "order-form";
+		invoiceService.completeOrder(cart_id);			
+		return "index";
 	}
+	
+	@RequestMapping("/invoice-list")
+	public String invoiceList(Model model) {
+		
+		model.addAttribute("invoices", invoiceService.list());
+		return "invoice-list";
+	}
+	
+	
 }

@@ -29,7 +29,9 @@ public class Invoice {
 	@Column
 	private String adress_delivery;
 	@Column
-	private int complete;
+	private boolean complete;
+	@Column
+	private double amount;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "username")
@@ -41,7 +43,7 @@ public class Invoice {
 	public Invoice() {
 	}
 
-	public Invoice(int number, Date date, String adress_delivery, int complete, User user) {
+	public Invoice(int number, Date date, String adress_delivery, boolean complete, User user) {
 		this.number = number;
 		this.date = date;
 		this.adress_delivery = adress_delivery;
@@ -81,11 +83,11 @@ public class Invoice {
 		this.adress_delivery = adress_delivery;
 	}
 
-	public int getComplete() {
+	public boolean getComplete() {
 		return complete;
 	}
 
-	public void setComplete(int complete) {
+	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
 
@@ -104,5 +106,12 @@ public class Invoice {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 }

@@ -22,4 +22,6 @@ public interface InvoiceDAO {
 	void addOne(Product product, Invoice invoice);
 	
 	double getCartTotal(Invoice cart);
+	
+	void completeOrder(int invoice_id);
 }

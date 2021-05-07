@@ -78,4 +78,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		return invoiceDAO.getCartTotal(cart);
 	}
+
+	@Transactional
+	@Override
+	public void completeOrder(int invoice_id) {
+		
+		invoiceDAO.completeOrder(invoice_id);		
+	}
 }

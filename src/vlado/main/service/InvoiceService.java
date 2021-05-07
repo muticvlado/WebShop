@@ -22,4 +22,6 @@ public interface InvoiceService {
 	Invoice getCart(String username);
 	
 	double getCartTotal(Invoice cart);
+	
+	void completeOrder(int invoice_id);
 }

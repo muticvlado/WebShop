@@ -27,11 +27,25 @@ public class UserController {
 		return "user-form";
 	}
 	
+	@RequestMapping("/user-form-registration")
+	public String getAddUserFormReg(Model model) {
+		
+		model.addAttribute("user", new User());	
+		return "user-form-registration";
+	}
+	
 	@RequestMapping("/user-save")
 	public String userSave(@ModelAttribute User user) {
 		
 		userService.save(user);
 		return "redirect:/user-list";
+	}
+	
+	@RequestMapping("/user-registration")
+	public String userReghistration(@ModelAttribute User user) {
+		
+		userService.save(user);
+		return "user-reg-confirmation";
 	}
 	
 	@RequestMapping("/user-list")

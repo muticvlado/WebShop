@@ -1,5 +1,7 @@
 package vlado.main;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,26 +22,33 @@ public class InvoiceController {
 	private ProductService productService;
 	
 	@RequestMapping("/catalog")
-	public String getCatalog(Model model) {
+	public String getCatalog(Principal principal, Model model) {
 		
 		model.addAttribute("products", productService.list());
-		model.addAttribute("total", invoiceService.getCartTotal(invoiceService.getCart("vlado")));
+		model.addAttribute("total", invoiceService.getCartTotal(invoiceService.getCart(principal.getName())));
 		return "catalog";
 	}
 	
+	@RequestMapping("/")
+	public String getCatalogIndex(Model model) {
+		
+		model.addAttribute("products", productService.list());
+		return "catalog-index";
+	}
+	
 	@RequestMapping("/product-add-to-cart")
-	public String addToCart(@RequestParam int product_id) {
+	public String addToCart(Principal principal, @RequestParam int product_id) {
 		
 		Product p = productService.getById(product_id);		
-		invoiceService.addToCart(p, "vlado");
+		invoiceService.addToCart(p, principal.getName());
 		
 		return "redirect:/catalog";
 	}
 	
 	@RequestMapping("/cart")
-	public String getCart(/*@RequestParam String username,*/ Model model) {
+	public String getCart(Principal principal, Model model) {
 		
-		Invoice cart = invoiceService.getCart("vlado");
+		Invoice cart = invoiceService.getCart(principal.getName());
 		model.addAttribute("cart", cart);
 		model.addAttribute("total", invoiceService.getCartTotal(cart));
 		return "cart";
@@ -49,7 +58,7 @@ public class InvoiceController {
 	public String orderSave(@RequestParam int cart_id) {
 		
 		invoiceService.completeOrder(cart_id);			
-		return "index";
+		return "buying-confirmation";
 	}
 	
 	@RequestMapping("/invoice-list")
@@ -59,5 +68,11 @@ public class InvoiceController {
 		return "invoice-list";
 	}
 	
+	@RequestMapping("/user-invoice-list")
+	public String userInvoiceList(Model model, Principal principal) {
+		
+		model.addAttribute("invoices", invoiceService.listByUsername(principal.getName()));
+		return "invoice-list";
+	}	
 	
 }

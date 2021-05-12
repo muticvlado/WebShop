@@ -13,6 +13,8 @@ public interface InvoiceService {
 	
 	List<Invoice> list();	
 	
+	List<Invoice> listByUsername(String username);
+	
 	Invoice getById(int id);
 	
 	//--------------------

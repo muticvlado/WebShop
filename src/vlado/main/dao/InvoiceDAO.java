@@ -13,6 +13,8 @@ public interface InvoiceDAO {
 	
 	List<Invoice> list();	
 	
+	List<Invoice> listByUser(String username);
+	
 	Invoice getById(int id);
 	
 	Invoice getCart(String username);

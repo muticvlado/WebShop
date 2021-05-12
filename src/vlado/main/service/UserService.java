@@ -17,4 +17,5 @@ public interface UserService {
 	//-------------------------------------
 	
 	int nextUserNumber();
+	
 }

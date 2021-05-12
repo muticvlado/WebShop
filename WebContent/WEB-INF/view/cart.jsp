@@ -2,6 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,10 +17,23 @@
 <body>
 <h1>Web shop</h1>
 <hr>
-<h3>Cart</h3><br>
-
+<h3>Cart</h3>
+<form:form action="logout">
+	<input type="submit" value="Logout">
+</form:form>
+<br>
+<sec:authorize access="hasRole('admin')">
+<a href="category-list">Category list</a>
+<a href="product-list">Product list</a>
+<a href="user-list">User list</a>
+<a href="invoice-list">Invoices</a>
+</sec:authorize>
+<a href="catalog">Catalog</a>
+<a href="user-invoice-list">Invoices of user</a>
+<br><br>
+<hr>
 <table>
-	<tr><td>Date</td><td>${cart.date}</td></tr>
+	<tr><td>Date</td><td><fmt:formatDate pattern="dd-MM-YYYY" value="${cart.date}"/> </td></tr>
 	<tr><td>Name</td><td>${cart.user.name}</td></tr>
 	<tr><td>Surname</td><td>${cart.user.surname}</td></tr>
 </table>
@@ -30,18 +46,18 @@
 				<tr>
 					<td>${item.id}</td>
 					<td>${item.product.name}</td>
-					<td>${item.price}</td>
-					<td>${item.quantity}</td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2">${item.price}</fmt:formatNumber></td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2">${item.quantity}</fmt:formatNumber></td>
 					<td style="text-align: center"><img src="${item.product.image}" style="max-height: 50px"/></td>					
 					<td>
 						<h5><a href="add-one?item_id=${item.id}">Add One</a></h5>
 						<h5><a href="remove-one?item_id=${item.id}">Remove One</a></h5>
 						<h5><a href="delete-item?item_id=${item.id}">Delete</a></h5>		
 					</td>	
-					<td>${item.price*item.quantity}</td>								
+					<td><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2">${item.price*item.quantity}</fmt:formatNumber></td>								
 				</tr>
 			</c:forEach>
-			<tr><td colspan="7"><h3 style="text-align: center">Ukupno: ${total}</h3></td></tr>			
+			<tr><td colspan="7"><h3 style="text-align: center">Ukupno: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2">${total}</fmt:formatNumber></h3></td></tr>			
 	</table>
 	
 </body>

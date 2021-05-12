@@ -85,4 +85,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 		invoiceDAO.completeOrder(invoice_id);		
 	}
+
+	@Transactional
+	@Override
+	public List<Invoice> listByUsername(String username) {
+		
+		return invoiceDAO.listByUser(username);
+	}
 }

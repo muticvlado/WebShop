@@ -130,4 +130,14 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 		cart.setComplete(true);	
 		cart.setAmount(getCartTotal(cart));
 	}
+
+	@Override
+	public List<Invoice> listByUser(String username) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		List<Invoice> invoices = session.createQuery("Select i from Invoice i where i.user.username=:username and i.complete = 1", Invoice.class)
+				.setParameter("username", username)
+				.getResultList();
+		return invoices;
+	}
 }

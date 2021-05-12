@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,19 @@
 
 <body>
 <h1>Web shop</h1>
+<form:form action="logout">
+	<input type="submit" value="Logout">
+</form:form>
+<br>
+<sec:authorize access="hasRole('admin')">
+<a href="category-list">Category list</a>
+<a href="product-list">Product list</a>
+<a href="user-list">User list</a>
+<a href="invoice-list">Invoices</a>
+</sec:authorize>
+<a href="catalog">Catalog</a>
+<a href="user-invoice-list">Invoices of user</a>
+<br><br>
 <hr>
 <h3>Product list</h3><br>
 <a href="product-form">Add new product</a><br><br>

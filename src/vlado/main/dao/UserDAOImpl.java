@@ -2,11 +2,13 @@ package vlado.main.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vlado.main.entity.Role;
 import vlado.main.entity.User;
 
 @Repository
@@ -17,6 +19,13 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void save(User user) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(user);
+	}
+	
+	@Override
+	public void addNew(User user) {
 		
 		Session session = sessionFactory.getCurrentSession();
 		int user_number = nextUserNumber();
@@ -51,6 +60,11 @@ public class UserDAOImpl implements UserDAO {
 				.createQuery("from User where user_number =: user_number", User.class)
 				.setParameter("user_number", user_number)
 				.getSingleResult();
+		Hibernate.initialize(user.getAuthorities());
+		for (Role role : user.getAuthorities()) {
+			System.out.println("ROLA USERA JE: " + role.getAuthority());
+		}
+		
 		return user;
 	}
 

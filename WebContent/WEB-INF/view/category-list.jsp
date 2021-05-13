@@ -14,19 +14,7 @@
 
 <body>
 <h1>Web shop</h1>
-<form:form action="logout">
-	<input type="submit" value="Logout">
-</form:form>
-<br>
-<sec:authorize access="hasRole('admin')">
-<a href="category-list">Category list</a>
-<a href="product-list">Product list</a>
-<a href="user-list">User list</a>
-<a href="invoice-list">Invoices</a>
-</sec:authorize>
-<a href="catalog">Catalog</a>
-<a href="user-invoice-list">Invoices of user</a>
-<br><br>
+<jsp:include page="include/manu.jsp"></jsp:include>
 <hr>
 <h3>Category list</h3>
 <a href="category-form">Add new category</a><br><br>

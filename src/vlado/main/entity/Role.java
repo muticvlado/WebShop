@@ -11,20 +11,20 @@ public class Role {
 
 	@Id
 	@Column
-	private String name;
+	private String authority;
 	
 	public Role() {
 	}
 
-	public Role(String name) {
-		this.name = name;
+	public Role(String authority) {
+		this.authority = authority;
 	}
 
-	public String getName() {
-		return name;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 }

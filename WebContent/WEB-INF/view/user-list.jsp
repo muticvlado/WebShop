@@ -14,35 +14,32 @@
 
 <body>
 <h1>Web shop</h1>
-<form:form action="logout">
-	<input type="submit" value="Logout">
-</form:form>
-<br>
-<sec:authorize access="hasRole('admin')">
-<a href="category-list">Category list</a>
-<a href="product-list">Product list</a>
-<a href="user-list">User list</a>
-<a href="invoice-list">Invoices</a>
-</sec:authorize>
-<a href="catalog">Catalog</a>
-<a href="user-invoice-list">Invoices of user</a>
-<br><br>
+<jsp:include page="include/manu.jsp"></jsp:include>
 <hr>
-<h3>User list</h3><br>
+<h3>User list</h3>
 <a href="user-form">Add new user</a><br><br>
 
 	<table>
-		<tr><th>User number</th><th>Name</th><th>Surname</th><th>Phone</th><th>Adress</th><th>Action</th></tr>
+		<tr><th>User number</th><th>Name</th><th>Surname</th><th>Phone</th><th>Adress</th><th>Enabled</th><th>Action</th></tr>
 			<c:forEach items="${users}" var="user">
+			<c:if test="${user.enabled == false}">
+				<tr style="color: red">
+			</c:if>
+				
+			<c:if test="${user.enabled == true}">
 				<tr>
+			</c:if>
+				
 					<td>${user.user_number}</td>
 					<td>${user.name}</td>
 					<td>${user.surname}</td>
 					<td>${user.phone}</td>
 					<td>${user.adress}</td>
+					<td>${user.enabled}</td>
 					<td>
 						<a href="user-update?user_number=${user.user_number}">Update</a> |
-					 	<a href="user-delete?user_number=${user.user_number}" onclick="return confirm('Delete user?')">Delete</a>			
+					 	<a href="user-delete?user_number=${user.user_number}" onclick="return confirm('Delete user?')">Delete</a> |
+					 	<a href="user-enable-disable?user_number=${user.user_number}">Enable or Disable</a>			
 					</td>					
 				</tr>
 			</c:forEach>

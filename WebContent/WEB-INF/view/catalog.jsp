@@ -14,23 +14,10 @@
 
 <body>
 <h1>Web shop</h1>
-<form:form action="logout">
-	<input type="submit" value="Logout">
-</form:form>
-<br>
-<sec:authorize access="hasRole('admin')">
-<a href="category-list">Category list</a>
-<a href="product-list">Product list</a>
-<a href="user-list">User list</a>
-<a href="invoice-list">Invoices</a>
-</sec:authorize>
-<a href="catalog">Catalog</a>
-<a href="user-invoice-list">Invoices of user</a>
-<br><br>
+<jsp:include page="include/manu.jsp"></jsp:include>
 <hr>
-<h3>Katalog proizvoda</h3><br>
+<h3>Katalog proizvoda</h3>
 <h4><a href="cart?username=vlado" style="color: green">Cart (${total})</a></h4>
-
 	<table>
 		<tr><th>Id</th><th>Name</th><th>Price</th><th>Image</th><th>Description</th><th>Action</th></tr>
 			<c:forEach items="${products}" var="product">

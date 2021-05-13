@@ -18,20 +18,7 @@
 <h1>Web shop</h1>
 <hr>
 <h3>Cart</h3>
-<form:form action="logout">
-	<input type="submit" value="Logout">
-</form:form>
-<br>
-<sec:authorize access="hasRole('admin')">
-<a href="category-list">Category list</a>
-<a href="product-list">Product list</a>
-<a href="user-list">User list</a>
-<a href="invoice-list">Invoices</a>
-</sec:authorize>
-<a href="catalog">Catalog</a>
-<a href="user-invoice-list">Invoices of user</a>
-<br><br>
-<hr>
+<jsp:include page="include/manu.jsp"></jsp:include>
 <table>
 	<tr><td>Date</td><td><fmt:formatDate pattern="dd-MM-YYYY" value="${cart.date}"/> </td></tr>
 	<tr><td>Name</td><td>${cart.user.name}</td></tr>

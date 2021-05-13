@@ -8,6 +8,8 @@ public interface UserDAO {
 	
 	void save(User user);
 	
+	void addNew(User user);
+	
 	void delete(int user_number);
 	
 	List<User> list();
@@ -17,4 +19,5 @@ public interface UserDAO {
 	//-------------------------------------
 	
 	int nextUserNumber();
+	
 }

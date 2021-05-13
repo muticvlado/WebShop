@@ -41,10 +41,17 @@ public class UserController {
 		return "redirect:/user-list";
 	}
 	
+	@RequestMapping("/user-save-profile")
+	public String userSaveProfile(@ModelAttribute User user) {
+		
+		userService.saveProfil(user);
+		return "redirect:/";
+	}
+	
 	@RequestMapping("/user-registration")
 	public String userReghistration(@ModelAttribute User user) {
 		
-		userService.save(user);
+		userService.registration(user);
 		return "user-reg-confirmation";
 	}
 	
@@ -70,4 +77,19 @@ public class UserController {
 		model.addAttribute("roles", roleService.list());		
 		return "user-form";
 	}
+	
+	@RequestMapping("/user-enable-disable")
+	public String userEnableOrDisable(@RequestParam int user_number) {
+		
+		userService.enableOrDisable(user_number);
+		return "redirect:/user-list";
+	}
+	
+	@RequestMapping("/user-form-profile")
+	public String userProfile(@RequestParam int user_number, Model model) {
+		
+		model.addAttribute("user", userService.getByUserNumber(user_number));
+		return "user-form-profile";
+	}
+	
 }

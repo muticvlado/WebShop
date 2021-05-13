@@ -15,6 +15,8 @@ public interface UserService {
 	List<User> list();
 	
 	User getByUserNumber(int user_number);
+
+	User getByUserName(String username);
 	
 	int nextUserNumber();
 	

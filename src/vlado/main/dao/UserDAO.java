@@ -16,7 +16,7 @@ public interface UserDAO {
 	
 	User getByUserNumber(int user_number);
 	
-	//-------------------------------------
+	User getUserByUsername(String username);
 	
 	int nextUserNumber();
 	

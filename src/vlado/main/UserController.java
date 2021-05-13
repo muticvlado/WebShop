@@ -90,6 +90,5 @@ public class UserController {
 		
 		model.addAttribute("user", userService.getByUserNumber(user_number));
 		return "user-form-profile";
-	}
-	
+	}	
 }

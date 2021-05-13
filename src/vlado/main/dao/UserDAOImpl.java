@@ -80,4 +80,15 @@ public class UserDAOImpl implements UserDAO {
 		
 		return (int)session.createQuery("Select max(user_number) from User").getSingleResult() + 1;
 	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		User user = session
+				.createQuery("From User where username=:username", User.class)
+				.setParameter("username", username)
+				.getSingleResult();		
+		return user;
+	}
 }

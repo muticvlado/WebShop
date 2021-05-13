@@ -17,7 +17,7 @@
 <h1>Web shop</h1>
 <jsp:include page="include/manu.jsp"></jsp:include>
 <hr>
-<h3>Invoice list - all users</h3><br>
+<h3>Invoice list</h3><br>
 
 	<table>
 		<tr><th>Id</th><th>Date</th><th>User</th><th>Amount</th><th>Details</th></tr>

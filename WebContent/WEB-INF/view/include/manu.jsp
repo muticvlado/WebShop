@@ -19,5 +19,5 @@ Admin >>
 User >>
 	<a href="catalog">Catalog</a> | 
 	<a href="user-invoice-list">Invoices of user</a> | 
-	<a href="user-form-profile?user_number=${cart.user.user_number}">Edit profile</a>
+	<a href="user-form-profile?user_number=${cart.user.user_number}">Edit profile >>> ${user.username}</a>
 <br><br>

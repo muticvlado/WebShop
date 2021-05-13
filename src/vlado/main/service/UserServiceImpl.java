@@ -82,4 +82,11 @@ public class UserServiceImpl implements UserService {
 		userEdit.setEmail(user.getEmail());
 		userEdit.setPhone(user.getPhone());		
 	}
+
+	@Transactional
+	@Override
+	public User getByUserName(String username) {
+
+		return userDAO.getUserByUsername(username);
+	}
 }

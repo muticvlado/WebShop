@@ -12,6 +12,7 @@ import vlado.main.entity.Invoice;
 import vlado.main.entity.Product;
 import vlado.main.service.InvoiceService;
 import vlado.main.service.ProductService;
+import vlado.main.service.UserService;
 
 @Controller
 public class InvoiceController {
@@ -20,10 +21,13 @@ public class InvoiceController {
 	private InvoiceService invoiceService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/catalog")
 	public String getCatalog(Principal principal, Model model) {
 		
+		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		model.addAttribute("products", productService.list());
 		model.addAttribute("total", invoiceService.getCartTotal(invoiceService.getCart(principal.getName())));
 		return "catalog";
@@ -48,6 +52,7 @@ public class InvoiceController {
 	@RequestMapping("/cart")
 	public String getCart(Principal principal, Model model) {
 		
+		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		Invoice cart = invoiceService.getCart(principal.getName());
 		model.addAttribute("cart", cart);
 		model.addAttribute("total", invoiceService.getCartTotal(cart));
@@ -62,8 +67,9 @@ public class InvoiceController {
 	}
 	
 	@RequestMapping("/invoice-list")
-	public String invoiceList(Model model) {
+	public String invoiceList(Model model, Principal principal) {
 		
+		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		model.addAttribute("invoices", invoiceService.list());
 		return "invoice-list";
 	}
@@ -71,6 +77,7 @@ public class InvoiceController {
 	@RequestMapping("/user-invoice-list")
 	public String userInvoiceList(Model model, Principal principal) {
 		
+		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		model.addAttribute("invoices", invoiceService.listByUsername(principal.getName()));
 		return "invoice-list";
 	}	

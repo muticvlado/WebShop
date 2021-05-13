@@ -23,7 +23,7 @@ public class ProductController {
 	public String getAddProductForm(Model model) {
 		
 		model.addAttribute("product", new Product());
-		model.addAttribute("categories", categoryService.list());		
+		model.addAttribute("categories", categoryService.list());
 		return "product-form";
 	}
 	

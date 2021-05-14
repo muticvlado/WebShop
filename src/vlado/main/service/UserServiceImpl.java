@@ -89,4 +89,11 @@ public class UserServiceImpl implements UserService {
 
 		return userDAO.getUserByUsername(username);
 	}
+
+	@Transactional
+	@Override
+	public void changePassword(String username, String oldP, String newP) {
+		
+		userDAO.changePassword(username, oldP, newP);		
+	}
 }

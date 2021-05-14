@@ -24,4 +24,5 @@ public interface UserService {
 	
 	void enableOrDisable(int user_number);
 	
+	void changePassword(String username, String oldP, String newP);	
 }

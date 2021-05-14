@@ -1,5 +1,7 @@
 package vlado.main;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,4 +93,27 @@ public class UserController {
 		model.addAttribute("user", userService.getByUserNumber(user_number));
 		return "user-form-profile";
 	}	
+	
+	@RequestMapping("/user-change-password-form")
+	public String userChangePasswordForm(@RequestParam String username, Model model, Principal principal) {
+		
+		model.addAttribute("user", userService.getByUserName(principal.getName()));
+		model.addAttribute("username", username);
+		model.addAttribute("oldP", null);
+		model.addAttribute("newP", null);
+		model.addAttribute("repeat", null);
+		
+		return "user-form-change-password";
+	}
+	
+	@RequestMapping("/user-change-password")
+	public String userChangePassword(@RequestParam String username,
+			@RequestParam String oldP, @RequestParam String newP, @RequestParam String repeatP) {
+		
+		if(newP.equalsIgnoreCase(repeatP)) {
+			userService.changePassword(username, oldP, newP);
+			return "user-change-pass-success";
+		}
+		return "redirect:/userChangePasswordForm";
+	}
 }

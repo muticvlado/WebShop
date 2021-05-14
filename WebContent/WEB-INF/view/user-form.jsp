@@ -15,7 +15,7 @@
 <hr>
 <h3>User</h3>
 
-<form:form method="post" modelAttribute="userNew" action="user-save">
+<form:form method="post" modelAttribute="user" action="user-save">
 	<table>	
 		<form:hidden path="user_number"/>	
 		<tr>

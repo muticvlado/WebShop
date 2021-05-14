@@ -18,6 +18,7 @@ Admin >>
 <br><br>
 User >>
 	<a href="catalog">Catalog</a> | 
-	<a href="user-invoice-list">Invoices of user</a> | 
-	<a href="user-form-profile?user_number=${cart.user.user_number}">Edit profile >>> ${user.username}</a>
+	<a href="user-invoice-list">Invoices of ${user.username}</a> | 
+	<a href="user-form-profile?user_number=${cart.user.user_number}">Edit profile >>> ${user.username}</a> | 
+	<a href="user-change-password-form?username=${user.username}">Change password >>> ${user.username}</a>
 <br><br>

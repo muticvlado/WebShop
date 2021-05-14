@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import vlado.main.entity.Role;
@@ -21,6 +22,14 @@ public class UserDAOImpl implements UserDAO {
 	public void save(User user) {
 		
 		Session session = sessionFactory.getCurrentSession();
+		
+		if(user.getUser_number() == 0) {
+			int user_number = nextUserNumber();
+			user.setUser_number(user_number);
+			String passwordEncode = new BCryptPasswordEncoder().encode(user.getPassword());
+			user.setPassword("{bcrypt}" + passwordEncode);
+		}
+		
 		session.saveOrUpdate(user);
 	}
 	
@@ -90,5 +99,19 @@ public class UserDAOImpl implements UserDAO {
 				.setParameter("username", username)
 				.getSingleResult();		
 		return user;
+	}
+
+	@Override
+	public void changePassword(String username, String oldPassword, String newPassword) {
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		User user = this.getUserByUsername(username);
+		String dbPassword = user.getPassword();		
+		
+		if(encoder.matches(dbPassword, oldPassword)) {
+			
+			newPassword = encoder.encode(newPassword);
+			user.setPassword(newPassword);			
+		}
 	}
 }

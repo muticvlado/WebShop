@@ -20,4 +20,5 @@ public interface UserDAO {
 	
 	int nextUserNumber();
 	
+	public void changePassword(String username, String oldPassword, String newPassword);
 }

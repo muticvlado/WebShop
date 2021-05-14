@@ -12,28 +12,27 @@
 <body>
 
 <h1>Web shop</h1>
+
 <jsp:include page="include/manu.jsp"></jsp:include>
 <hr>
-<h3>User</h3>
+<h3>User - change password</h3>
 
-<form:form method="post" modelAttribute="user" action="user-save-profile">
-	<table>	
-		<form:hidden path="user_number"/>		
+<form:form method="post" action="user-change-password">
+
+	<table>
 		<tr>
-			<td>Name</td><td><form:input path="name"/></td>
+			<td>Username</td><td><input name="username" value="${username}"/></td>
 		</tr>
 		<tr>
-			<td>Surname</td><td><form:input path="surname"/></td>
+			<td>Old password</td><td><input name="oldP"/></td>
 		</tr>
 		<tr>
-			<td>Email</td><td><form:input path="email"/></td>
+			<td>New password</td><td><input name="newP"/></td>
 		</tr>
 		<tr>
-			<td>Phone</td><td><form:input path="phone"/></td>
+			<td>Repeat new password</td><td><input name="repeatP"/></td>
 		</tr>
-		<tr>
-			<td>Adress</td><td><form:textarea path="adress" cols="40" rows="5"/></td>
-		</tr>		
+			
 		<tr>
 			<td colspan="2"><input type="submit" value="Save"></td>
 		</tr>

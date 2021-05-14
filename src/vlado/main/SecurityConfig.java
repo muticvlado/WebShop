@@ -28,26 +28,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 		 http.authorizeRequests()
 		  
 		  .antMatchers("/").permitAll()
+		  .antMatchers("/user-form-registration").permitAll()
+		  //.antMatchers("/resources").permitAll() 
 		  
 		  .antMatchers("/catalog").hasAnyRole("kupac", "admin")
-		  .antMatchers("/product-add-to-cart").hasAnyRole("kupac", "admin")
 		  .antMatchers("/cart").hasAnyRole("kupac", "admin")
+		  .antMatchers("/product-add-to-cart").hasAnyRole("kupac", "admin")
+		  .antMatchers("/add-one").hasAnyRole("kupac", "admin")
+		  .antMatchers("/remove-one").hasAnyRole("kupac", "admin")
+		  .antMatchers("/delete-item").hasAnyRole("kupac", "admin")
 		  .antMatchers("/order-save").hasAnyRole("kupac", "admin")
-		  .antMatchers("/invoice-list").hasAnyRole("kupac", "admin")
-		  
-		  .antMatchers("/catalog").hasAnyRole("kupac", "admin")
-		  
-		  
-		  
-		  .antMatchers("/administration/**").hasRole("admin") 
-		  
+		  .antMatchers("/user-invoice-list").hasAnyRole("kupac", "admin") 
+		  .antMatchers("/invoice-details").hasAnyRole("kupac", "admin") 
+		  .antMatchers("/user-save-profile").hasAnyRole("kupac", "admin") 
+		  .antMatchers("/user-form-profile").hasAnyRole("kupac", "admin") 
+		  .antMatchers("/user-change-password-form").hasAnyRole("kupac", "admin") 
+		  .antMatchers("/user-change-password").hasAnyRole("kupac", "admin") 
+		 
+		  .antMatchers("/*").hasRole("admin")		  
 		  
 		  .and()
 		  .formLogin()
 		  .loginProcessingUrl("/authenticateTheUser").permitAll()
 		  .and()
-		  .logout().permitAll();
-//		  .and()
-//		  .exceptionHandling().accessDeniedPage("/access-deneid");
+		  .logout().permitAll()
+		  .and()
+		  .exceptionHandling().accessDeniedPage("/access-deneid");
 	}
 }

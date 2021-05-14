@@ -29,7 +29,7 @@ public class InvoiceController {
 		
 		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		model.addAttribute("products", productService.list());
-		model.addAttribute("total", invoiceService.getCartTotal(invoiceService.getCart(principal.getName())));
+		model.addAttribute("total", invoiceService.getTotal(invoiceService.getCart(principal.getName())));
 		return "catalog";
 	}
 	
@@ -55,7 +55,7 @@ public class InvoiceController {
 		model.addAttribute("user", userService.getByUserName(principal.getName()));
 		Invoice cart = invoiceService.getCart(principal.getName());
 		model.addAttribute("cart", cart);
-		model.addAttribute("total", invoiceService.getCartTotal(cart));
+		model.addAttribute("total", invoiceService.getTotal(cart));
 		return "cart";
 	}
 	
@@ -81,5 +81,14 @@ public class InvoiceController {
 		model.addAttribute("invoices", invoiceService.listByUsername(principal.getName()));
 		return "invoice-list";
 	}	
+	
+	@RequestMapping("/invoice-details")
+	public String getInvoice(@RequestParam int id, Model model) {
+		
+		Invoice invoice = invoiceService.getById(id);
+		model.addAttribute("invoice", invoice);
+		model.addAttribute("total", invoiceService.getTotal(invoice));
+		return "invoice-details";
+	}
 	
 }

@@ -50,7 +50,10 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 	public Invoice getById(int id) {
 		
 		Session session = sessionFactory.getCurrentSession();
-		return session.get(Invoice.class, id);
+		Invoice invoice = session.get(Invoice.class, id);
+		Hibernate.initialize(invoice.getItems());
+		
+		return invoice;
 	}
 	
 	@Override
@@ -112,7 +115,7 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 	}
 
 	@Override
-	public double getCartTotal(Invoice cart) {
+	public double getTotal(Invoice cart) {
 		
 		double total = 0;
 		List<Item> items = cart.getItems();
@@ -128,7 +131,7 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Invoice cart = session.get(Invoice.class, invoice_id);
 		cart.setComplete(true);	
-		cart.setAmount(getCartTotal(cart));
+		cart.setAmount(getTotal(cart));
 	}
 
 	@Override

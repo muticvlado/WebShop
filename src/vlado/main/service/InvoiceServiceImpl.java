@@ -74,9 +74,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	
 	@Transactional
 	@Override
-	public double getCartTotal(Invoice cart) {
+	public double getTotal(Invoice cart) {
 		
-		return invoiceDAO.getCartTotal(cart);
+		return invoiceDAO.getTotal(cart);
 	}
 
 	@Transactional

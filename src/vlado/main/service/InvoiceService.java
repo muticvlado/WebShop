@@ -23,7 +23,7 @@ public interface InvoiceService {
 	
 	Invoice getCart(String username);
 	
-	double getCartTotal(Invoice cart);
+	double getTotal(Invoice cart);
 	
 	void completeOrder(int invoice_id);
 }

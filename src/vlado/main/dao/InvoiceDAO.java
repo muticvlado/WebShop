@@ -23,7 +23,7 @@ public interface InvoiceDAO {
 	
 	void addOne(Product product, Invoice invoice);
 	
-	double getCartTotal(Invoice cart);
+	double getTotal(Invoice cart);
 	
 	void completeOrder(int invoice_id);
 }

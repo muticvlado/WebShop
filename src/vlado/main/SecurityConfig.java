@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 		  
 		  .antMatchers("/").permitAll()
 		  .antMatchers("/user-form-registration").permitAll()
-		  //.antMatchers("/resources").permitAll() 
 		  
 		  .antMatchers("/catalog").hasAnyRole("kupac", "admin")
 		  .antMatchers("/cart").hasAnyRole("kupac", "admin")
